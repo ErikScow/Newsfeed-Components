@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: `My New Content`,
+    date: `Jan 22nd, 2020`,
+    firstParagraph: `Some interesting stuff`,
+    secondParagraph: `Some interesting stuff`,
+    thirdParagraph: `Some interesting stuff`
   }
 ];
 
@@ -112,3 +119,57 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const createArticle = (articleData) => {
+//vars for each element
+  const articleContainer = document.createElement('div')
+  const articleTitle = document.createElement('h2')
+  const articleDate = document.createElement('p')
+  const articleP1 = document.createElement('p')
+  const articleP2 = document.createElement('p')
+  const articleP3 = document.createElement('p')
+  const articleButton = document.createElement('span')
+
+//structure
+  articleContainer.appendChild(articleTitle)
+  articleContainer.appendChild(articleDate)
+  articleContainer.appendChild(articleP1)
+  articleContainer.appendChild(articleP2)
+  articleContainer.appendChild(articleP3)
+  articleContainer.appendChild(articleButton)
+
+//classes
+  articleContainer.classList.add('article')
+  articleDate.classList.add('date')
+  articleButton.classList.add('expandButton')
+
+//content
+  articleTitle.textContent = `${articleData.title}`
+  articleDate.textContent = `${articleData.date}`
+  articleP1.textContent = `${articleData.firstParagraph}`
+  articleP2.textContent = `${articleData.secondParagraph}`
+  articleP3.textContent = `${articleData.thirdParagraph}`
+  articleButton.textContent = `open`
+
+//event listener
+  let x = true
+  articleButton.addEventListener('click', () => {
+    articleContainer.classList.toggle('article-open');
+    if (x === true){
+      x = false
+      articleButton.textContent = (`close`)
+    } else {
+      x = true
+      articleButton.textContent = (`open`)
+    }
+    
+  })  
+
+  return articleContainer
+}
+
+const articles = document.querySelector('.articles')
+
+data.forEach(item => {
+  articles.appendChild(createArticle(item))
+})
